@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from .models import Post
 
 class ExecuteCodeSerializer(serializers.Serializer):
     runtime = serializers.CharField(max_length=100)
@@ -14,3 +15,13 @@ class UserRegistrationSerializer(serializers.Serializer):
         ret = super().to_representation(instance)
         ret.pop('password')
         return ret
+    
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['id','title', 'user', 'image']
+
+class PostSerializerCreate(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields = ['title', 'image']
